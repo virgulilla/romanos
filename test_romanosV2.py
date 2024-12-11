@@ -1,4 +1,4 @@
-from fromanosV2 import a_romanos, descomponer, traducir
+from fromanosV2 import a_romanos, descomponer, traducir, a_decimal
 
 def _test_simbolos_sencillos():
     assert a_romanos(1) == 'I'
@@ -18,15 +18,19 @@ def test_descomponer():
     resultado = descomponer(3,'1')
     assert resultado == 1000
 
-def test_traducir():
-    assert traducir(9) == 'IX'
-    assert traducir(30) == 'XXX'
-    assert traducir(900) == 'CM'
-    assert traducir(1000) == 'M'
-    assert traducir(2) == 'II'
+def test_traducir_a_romano():
+    assert traducir(9, False) == 'IX'
+    assert traducir(30, False) == 'XXX'
+    assert traducir(900, False) == 'CM'
+    assert traducir(1000, False) == 'M'
+    assert traducir(2, False) == 'II'
 
-    assert traducir(800) == 'DCCC'
+    assert traducir(800, False) == 'DCCC'
 
 def test_pasar_a_romano():
-    assert a_romanos(1939) == 'MCMXXXIX'    
+    assert a_romanos(1939) == 'MCMXXXIX'
+
+def test_pasar_a_decimal():
+    assert a_decimal('MMMCMXCIX') == 3999        
+    assert a_decimal('MMCDXXIV') == 2424
 
