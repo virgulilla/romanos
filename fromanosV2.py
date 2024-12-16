@@ -1,3 +1,5 @@
+from typing import Union
+
 numeros_romanos = {
     'I': 1,
     'V': 5, 
@@ -155,3 +157,12 @@ def valida_repeticiones(num_roman: str) -> bool:
             result = False
             break
     return result, char, limit
+
+class Roman_Number:
+    def __init__(self, numero:Union[int | str]):
+        if type(numero) == int:
+            self.valor = numero
+            self.representacion = a_romanos(numero)
+        elif type(numero) == str:
+            self.valor = a_arabigo(numero)             
+            self.representacion = numero

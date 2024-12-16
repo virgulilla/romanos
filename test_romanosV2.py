@@ -1,4 +1,4 @@
-from fromanosV2 import a_romanos, descomponer, traducir, a_arabigo, RomanNumberError, valida_repeticiones
+from fromanosV2 import a_romanos, descomponer, traducir, a_arabigo, RomanNumberError, valida_repeticiones, Roman_Number
 import pytest
 
 def test_simbolos_sencillos():
@@ -104,3 +104,13 @@ def test_no_sumar_mismo_grupo_distinto_valor():
 def test_no_restas_contrapeadas():
     with pytest.raises(RomanNumberError):
         a_arabigo("IXC")
+
+def test_constructor_entero_clase_romana():
+    rn = Roman_Number(8)
+    assert rn.valor == 8
+    assert rn.representacion == "VIII"      
+
+def test_constructor_cadena_clase_Romana():
+    rn = Roman_Number("VIII") 
+    assert rn.valor == 8
+    assert rn.representacion == "VIII"
