@@ -166,3 +166,76 @@ class Roman_Number:
         elif type(numero) == str:
             self.valor = a_arabigo(numero)             
             self.representacion = numero
+        else:
+            raise RomanNumberError("solo admitimos int o str")    
+
+    def __str__(self):
+        return self.representacion
+    
+    def __repr__(self):
+        return self.__str__()
+    
+    def __add__(self, other: object):
+        if not isinstance(other, (int, self.__class__)):
+            raise TypeError(f"'+' not supported between instances of 'Roman_Number' and '{other.__class__}'")
+        return Roman_Number(self.valor + (other if isinstance(other, int) else other.valor))
+    
+    def __sub__(self, other: object):
+        if not isinstance(other, (int, self.__class__)):
+            raise TypeError(f"'-' not supported between instances of 'Roman_Number' and '{other.__class__}'")
+        result = self.valor - (other if isinstance(other, int) else other.valor)
+        if result < 0 or result > 3999:
+            raise TypeError("El resultado de la resta no puede ser < 0 o > 3999")          
+        
+        return Roman_Number(result)
+    
+    def __mul__(self, other: object):
+        if not isinstance(other, (int, self.__class__)):
+            raise TypeError(f"'*' not supported between instances of 'Roman_Number' and '{other.__class__}'")
+        result = self.valor * (other if isinstance(other, int) else other.valor)
+        if result < 0 or result > 3999:
+            raise TypeError("El resultado de la multiplicacion no puede ser < 0 o > 3999")          
+        
+        return Roman_Number(result)
+    
+    def __floordiv__(self, other: object):
+        if not isinstance(other, (int, self.__class__)):
+            raise TypeError(f"'/' not supported between instances of 'Roman_Number' and '{other.__class__}'")
+        otro_valor = (other if isinstance(other, int) else other.valor)
+        if otro_valor == 0:
+            raise TypeError("El valor no puede ser 0")          
+        result = self.valor // otro_valor        
+        if result <= 0 or result > 3999:
+            raise TypeError("El resultado de la division no puede ser < 0 o > 3999")          
+        
+        return Roman_Number(result)
+    
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, self.__class__):
+            return False
+        return self.valor == other.valor
+    
+    def __lt__(self, other: object) -> bool:
+        if not isinstance(other, self.__class__):
+            return False
+        return self.valor < other.valor
+    def __le__(self, other: object) -> bool:
+        if not isinstance(other, self.__class__):
+            return False
+        return self.valor <= other.valor
+    def __gt__(self, other: object) -> bool:
+        if not isinstance(other, self.__class__):
+            return False
+        return self.valor > other.valor
+    def __ge__(self, other: object) -> bool:
+        if not isinstance(other, self.__class__):
+            return False
+        return self.valor >= other.valor
+    def __ne__(self, other: object) -> bool:
+        if not isinstance(other, self.__class__):
+            return False
+        return self.valor != other.valor
+
+    def __hash__(self):
+        return hash([self.valor])
+

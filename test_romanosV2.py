@@ -114,3 +114,25 @@ def test_constructor_cadena_clase_Romana():
     rn = Roman_Number("VIII") 
     assert rn.valor == 8
     assert rn.representacion == "VIII"
+
+def test_str_romanos():
+    rn = Roman_Number(9)
+    assert str(rn) == "IX"
+
+def test_suma_romanos():        
+    num1 = Roman_Number(10)   # X
+    num2 = Roman_Number(5)    # V
+    resultado = num1 + num2   # Debería devolver 15 (XV)
+    assert resultado == 15, f"Error: {resultado} no es igual a 15"
+
+def test_suma_romano_con_entero():
+    # Caso de prueba: suma de Roman_Number con un entero
+    num1 = Roman_Number(10)  # X
+    resultado = num1 + 5     # Debería devolver 15
+    assert resultado == 15, f"Error: {resultado} no es igual a 15"
+
+def test_suma_tipo_invalido():
+    # Caso de prueba: suma con un tipo no soportado
+    num1 = Roman_Number(10)  # X
+    with pytest.raises(TypeError):
+        resultado = num1 + "texto"

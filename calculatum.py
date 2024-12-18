@@ -1,44 +1,39 @@
-from fromanosV2 import a_arabigo, a_romanos, RomanNumberError
+from fromanosV2 import RomanNumberError, Roman_Number
 
-def convertir_a_entero(numero):
-    try:
-        if numero.isdigit():
-            return int(numero)
-        else:
-            return a_arabigo(numero)
-    except RomanNumberError:
-        raise ValueError("Entrada incorrecta")
+def tratar_valor_entrado(numero: str):
+    if numero.isdigit():
+        return int(numero)
+    else:
+        return numero
 
-def calcular_resultado(num1, num2, opcion):
+def calcular_resultado(num1: str, num2: str, opcion: str):
     try:
-        valor1 = convertir_a_entero(num1)
-        valor2 = convertir_a_entero(num2)
+        num1 = tratar_valor_entrado(num1)
+        num1 = Roman_Number(num1)
+        num2 = tratar_valor_entrado(num2)
+        num2 = Roman_Number(num2)
 
         if opcion == "1":
-            resultado = valor1 + valor2
+            resultado = num1 + num2
             operador = "+"
         elif opcion == "2":
-            resultado = valor1 - valor2
+            resultado = num1 - num2
             operador = "-"
         elif opcion == "3":
-            resultado = valor1 * valor2
+            resultado = num1 * num2
             operador = "x"
-        elif opcion == "4":
-            if valor2 == 0:
-                return "División por cero no permitida"
-            resultado = valor1 // valor2
-            operador = "÷"
+        elif opcion == "4":            
+            resultado = num1 // num2
+            operador = "/"
         else:
             return "Opción incorrecta"
-
-        if resultado <= 0 or resultado > 3999:
-            return "Resultado inválido"
-        
-        resultado_romano = a_romanos(resultado)
-        return f"{num1} {operador} {num2} = {resultado_romano}"
     
-    except ValueError as error:
+        return f"{num1.valor} {operador} {num2.valor} = {resultado.representacion}"
+    
+    except TypeError as error:
         return str(error)
+    except RomanNumberError as rnerror:
+        return str(rnerror)
 
 def menu():
     while True:
