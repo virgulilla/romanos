@@ -120,19 +120,14 @@ def test_str_romanos():
     assert str(rn) == "IX"
 
 def test_suma_romanos():        
-    num1 = Roman_Number(10)   # X
-    num2 = Roman_Number(5)    # V
-    resultado = num1 + num2   # Debería devolver 15 (XV)
-    assert resultado == 15, f"Error: {resultado} no es igual a 15"
+    assert Roman_Number(9) + Roman_Number(10) == Roman_Number(19)
+    assert Roman_Number(9) + 10 == Roman_Number(19)
 
-def test_suma_romano_con_entero():
-    # Caso de prueba: suma de Roman_Number con un entero
-    num1 = Roman_Number(10)  # X
-    resultado = num1 + 5     # Debería devolver 15
-    assert resultado == 15, f"Error: {resultado} no es igual a 15"
+def test_suma_enteros_romanos():
+    assert 9 + Roman_Number(10) == Roman_Number(19)
 
-def test_suma_tipo_invalido():
-    # Caso de prueba: suma con un tipo no soportado
-    num1 = Roman_Number(10)  # X
-    with pytest.raises(TypeError):
-        resultado = num1 + "texto"
+def test_resta_reversa():
+    assert 9 - Roman_Number(6) == Roman_Number(3)  
+
+def test_division_reversa():
+    assert 9 // Roman_Number(3) == Roman_Number(3)

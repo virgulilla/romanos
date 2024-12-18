@@ -180,6 +180,11 @@ class Roman_Number:
             raise TypeError(f"'+' not supported between instances of 'Roman_Number' and '{other.__class__}'")
         return Roman_Number(self.valor + (other if isinstance(other, int) else other.valor))
     
+    # hacer un reverse de los operandos
+    def __radd__(self, other: object):
+        #return self.__add__(other)
+        return self + other
+
     def __sub__(self, other: object):
         if not isinstance(other, (int, self.__class__)):
             raise TypeError(f"'-' not supported between instances of 'Roman_Number' and '{other.__class__}'")
@@ -189,6 +194,14 @@ class Roman_Number:
         
         return Roman_Number(result)
     
+    def __rsub__(self, other: object):
+        if isinstance(other, int):
+            number_value = other
+        else:
+            raise TypeError(f"'-' no permitida entre {Roman_Number.__name__} y {other.__class__.__name__}")
+                      
+        return Roman_Number(number_value) - self
+    
     def __mul__(self, other: object):
         if not isinstance(other, (int, self.__class__)):
             raise TypeError(f"'*' not supported between instances of 'Roman_Number' and '{other.__class__}'")
@@ -197,6 +210,9 @@ class Roman_Number:
             raise TypeError("El resultado de la multiplicacion no puede ser < 0 o > 3999")          
         
         return Roman_Number(result)
+    
+    def __rmul__(self, other: object):
+        return self * other
     
     def __floordiv__(self, other: object):
         if not isinstance(other, (int, self.__class__)):
@@ -209,6 +225,14 @@ class Roman_Number:
             raise TypeError("El resultado de la division no puede ser < 0 o > 3999")          
         
         return Roman_Number(result)
+    
+    def __rfloordiv__(self, other: object):
+        if isinstance(other, int):
+            number_value = other
+        else:
+            raise TypeError(f"'-' no permitida entre {Roman_Number.__name__} y {other.__class__.__name__}")
+                      
+        return Roman_Number(number_value) // self
     
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, self.__class__):
