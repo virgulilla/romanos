@@ -41,7 +41,41 @@ def traducir(valor: int) -> str:
     }
     return simbolos[valor]
 
-def a_romanos(numero: int) -> str:
+def a_romanos(numero: int)-> str:
+    numero_str = str(numero)
+    
+    # Aseguramos que sea múltiplo de 3
+    resto = len(numero_str) % 3
+    if resto != 0:
+        numero_str = '0' * (3 - resto) + numero_str    
+
+    tripletas = []
+    i = 0
+    
+    while i < len(numero_str):
+        # Obtenemos la tripleta actual
+        start = max(0, len(numero_str) - (i + 3))
+        end = len(numero_str) - i
+        tripleta_actual = numero_str[start:end]
+        
+        # Evaluamos el siguiente valor si existe
+        siguiente_indice = start - 1
+        if siguiente_indice >= 0 and int(numero_str[siguiente_indice]) < 4:
+            # Añadimos el siguiente valor a la tripleta actual
+            tripleta_actual = numero_str[siguiente_indice] + tripleta_actual
+            i += 1  # Saltamos este dígito adicional
+        
+        romano = a_romano(tripleta_actual)
+        tripletas.append(romano +"*" * (len(tripletas)))
+        
+        # Avanzamos al siguiente bloque
+        i += 3
+
+    return ''.join(reversed(tripletas))
+
+
+
+def a_romano(numero: int) -> str:
     lista_traducciones = []
 
     numero_str = str(numero)
@@ -263,3 +297,5 @@ class Roman_Number:
     def __hash__(self):
         return hash([self.valor])
 
+
+a_romanos(14149387932)

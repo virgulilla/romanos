@@ -131,3 +131,6 @@ def test_resta_reversa():
 
 def test_division_reversa():
     assert 9 // Roman_Number(3) == Roman_Number(3)
+
+def test_romanos_mayor_3999():
+    assert a_romanos(14149387932) == "XIV***CXLIX**CCCLXXXVII*CMXXXII"
