@@ -296,6 +296,3 @@ class Roman_Number:
 
     def __hash__(self):
         return hash([self.valor])
-
-
-a_romanos(14149387932)
