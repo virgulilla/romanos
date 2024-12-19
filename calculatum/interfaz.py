@@ -60,6 +60,3 @@ def menu():
         if continuar == "N":
             print("Saliendo de la aplicación.")
             break
-
-if __name__ == "__main__":
-    menu()
