@@ -108,6 +108,30 @@ def puede_restar(lista_restas: list, resta: int) -> bool:
 def puede_sumar(valor: int, last: int) -> bool:
     return len(str(valor)) < len(str(last))
 
+def to_components(roman: str) -> list:
+    orden = 0
+    number = ""
+    numbers = []
+    for car in roman:
+        if car != "*":
+            if order > 0:
+                numbers.append((number, order))
+                order = 0
+                number = ""
+            number += car
+        else:
+            order += 1
+    numbers.append((number, order))
+    return numbers
+
+
+
+def a_arabigos(roman: str) -> int:
+    result = 0
+    components = to_components(roman)
+    for romano, orden in components:
+        result += (a_arabigo(romano) * (1000 ** orden))
+    return result    
 
 def a_arabigo(num_roman: str) -> int:
     valida, char, limit = valida_repeticiones(num_roman)
