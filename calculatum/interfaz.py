@@ -1,4 +1,4 @@
-from fromanosV2 import RomanNumberError, Roman_Number
+from calculatum.entities import RomanNumberError, Roman_Number
 
 def tratar_valor_entrado(numero: str):
     if numero.isdigit():
@@ -61,4 +61,5 @@ def menu():
             print("Saliendo de la aplicación.")
             break
 
-menu()
+if __name__ == "__main__":
+    menu()
